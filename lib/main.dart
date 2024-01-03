@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
 Future<void> _authenticate() async {
   final clientId = '8f4562b21a';
   final redirectUri =
-      'https://demo.extensionerp.com/login'; // Should match the setup in Zoho Developer Console
+      'https://flutterwebauth.vercel.app/'; // Should match the setup in Zoho Developer Console
   final authUrl =
       "https://demo.extensionerp.com/api/method/frappe.integrations.oauth2.authorize?client_id=$clientId&response_type=code&grant_type=Authorization Code&redirect_uri=$redirectUri";
 
