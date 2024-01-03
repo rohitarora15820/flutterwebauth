@@ -29,7 +29,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomeScreen());
+    return const MaterialApp(home: HomeScreen());
   }
 
 }
@@ -42,6 +42,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Uri? currentUri;
+  @override
+  void initState() {
+    geturl();
+    super.initState();
+  }
+
+
+
+  void geturl() {
+    currentUri = Uri.base;
+    String currentUrl = currentUri.toString();
+    setState(() {});
+    print('Current URL: $currentUrl');
+  }
   String? token = "";
 
   Future<void> _authenticate() async {
