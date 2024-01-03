@@ -37,6 +37,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   oauth_dio: ^0.2.9
   flutter_web_auth_2: ^3.1.1
+  http: ^0.13.3
+  url_launcher:
+  webview_flutter: ^2.0.15
+  flutter_secure_storage: ^9.0.0
 
 
 dev_dependencies:
