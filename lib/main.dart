@@ -1,28 +1,8 @@
 import 'dart:developer';
-
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:oauth_dio/oauth_dio.dart';
-
-// void main() {
-//   final oauth = OAuth(
-//       clientId: '8f4562b21a',
-//       clientSecret: '8d1af1363a',
-//       tokenUrl:
-//           'https://your-frappe-instance.com/api/method/frappe.integrations.oauth2.get_token');
-//
-//   oauth
-//       .requestToken(
-//           PasswordGrant(username: 'Administrator', password: 'admin1234'))
-//       .then((token) {
-//     print('AccessToken: ${token.accessToken}');
-//     print('RefreshToken: ${token.refreshToken}');
-//     print('Expiration: ${token.expiration}');
-//   });
-// }
-
 import 'package:flutter/material.dart';
-import 'package:oauth_dio/oauth_dio.dart';
-import 'package:dio/dio.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -43,9 +23,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Uri? currentUri;
+  String? urlPath;
   @override
   void initState() {
-    geturl();
+    // geturl();
     super.initState();
   }
 
@@ -54,8 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void geturl() {
     currentUri = Uri.base;
     String currentUrl = currentUri.toString();
-    setState(() {});
-    print('Current URL: $currentUrl');
+    setState(() {
+      urlPath=currentUrl;
+    });
+    print('Current URL: $urlPath');
   }
   String? token = "";
 
@@ -65,16 +48,13 @@ class _HomeScreenState extends State<HomeScreen> {
         'https://flutterwebauth.vercel.app/';
     final authUrl =
         "https://demo.extensionerp.com/api/method/frappe.integrations.oauth2.authorize?client_id=$clientId&response_type=code&grant_type=Authorization Code&redirect_uri=$redirectUri";
-
     try {
       final result = await FlutterWebAuth2.authenticate(
         url: authUrl, callbackUrlScheme: 'myapp',
       );
       log("Result${result}");
-
       token = "Result${result}";
-      // final token = Uri.parse(result);
-      // log("Token${token}");
+
       print(result);
     } catch (e) {
       log(e.toString());
@@ -88,11 +68,16 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: Column(
           children: [
-            Text("Token $token"),
+            Text("Token $urlPath"),
             TextButton(
               child: const Text("Oauth"),
               onPressed: () {
                 _authenticate();
+              },
+            ), TextButton(
+              child: const Text("getUrl"),
+              onPressed: () {
+                geturl();
               },
             ),
           ],
